@@ -1,0 +1,1573 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="RSVP to Amna's 18th Birthday Celebration — March 21, 2026." />
+    <title>RSVP — Amna's 18th Birthday</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet" />
+    <style>
+        /* ═══════════════════════════════════════════════
+       RSVP PAGE — Standalone Styles
+    ═══════════════════════════════════════════════ */
+        :root {
+            --pink: #f8c8d4;
+            --pink-deep: #e8a0b8;
+            --pink-soft: #fde8ef;
+            --gold: #d4a843;
+            --gold-light: #f0d080;
+            --gold-pale: #fdf3d8;
+            --ivory: #fdf6ee;
+            --cream: #faf4f0;
+            --rose: #c97a8a;
+            --rose-dark: #a85a6a;
+            --lavender: #e8e0f0;
+            --text-dark: #3a2a2e;
+            --text-mid: #6b4a58;
+            --text-light: #9a7a88;
+            --white: #ffffff;
+            --shadow-sm: 0 4px 20px rgba(200, 120, 140, .12);
+            --shadow-md: 0 8px 40px rgba(200, 120, 140, .18);
+            --shadow-lg: 0 16px 60px rgba(200, 120, 140, .24);
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --radius-lg: 32px;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            min-height: 100vh;
+            min-height: 100dvh;
+            background: var(--ivory);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ─── Canvas ─── */
+        #confetti-canvas {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9999;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* ─── Sparkle background ─── */
+        .sparkle-bg {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .sparkle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0;
+            animation: sparkleFade var(--dur, 4s) ease-in-out var(--delay, 0s) infinite;
+        }
+
+        @keyframes sparkleFade {
+            0% {
+                opacity: 0;
+                transform: scale(.5) translateY(0);
+            }
+
+            40% {
+                opacity: .75;
+                transform: scale(1.2) translateY(-18px);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(.8) translateY(-55px);
+            }
+        }
+
+        /* ═══ TOP BAR ═══ */
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            height: 64px;
+            background: rgba(253, 246, 238, .9);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(212, 168, 67, .15);
+        }
+
+        .topbar-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--rose-dark);
+            letter-spacing: .05em;
+        }
+
+        .topbar-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-size: .8rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--text-mid);
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 50px;
+            border: 1.5px solid rgba(201, 122, 138, .25);
+            transition: background .2s ease, color .2s ease, border-color .2s ease;
+        }
+
+        .topbar-back:hover {
+            background: var(--pink-soft);
+            color: var(--rose-dark);
+            border-color: var(--pink-deep);
+        }
+
+        .topbar-back-arrow {
+            font-size: 1rem;
+        }
+
+        /* ═══ HERO STRIP ═══ */
+        .rsvp-hero {
+            position: relative;
+            overflow: hidden;
+            padding: 60px 24px 52px;
+            text-align: center;
+            background:
+                radial-gradient(ellipse 75% 60% at 15% 10%, rgba(248, 200, 212, .6) 0%, transparent 65%),
+                radial-gradient(ellipse 60% 55% at 85% 90%, rgba(240, 208, 128, .4) 0%, transparent 65%),
+                linear-gradient(160deg, #fdf6ee 0%, #fde8ef 50%, #fdf3d8 100%);
+        }
+
+        .rsvp-hero::before,
+        .rsvp-hero::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--pink-deep), var(--gold-light), var(--pink-deep));
+        }
+
+        .rsvp-hero::before {
+            top: 0;
+        }
+
+        .rsvp-hero::after {
+            bottom: 0;
+        }
+
+        .hero-floater {
+            position: absolute;
+            pointer-events: none;
+            font-size: 5rem;
+            line-height: 1;
+            color: rgba(232, 160, 184, .15);
+            animation: float 7s ease-in-out infinite;
+        }
+
+        .hero-floater:nth-child(1) {
+            top: 10px;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .hero-floater:nth-child(2) {
+            bottom: 10px;
+            right: 5%;
+            animation-delay: 3s;
+            font-size: 3.5rem;
+            color: rgba(212, 168, 67, .12);
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-14px) rotate(6deg);
+            }
+        }
+
+        .rsvp-hero-label {
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .3em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 12px;
+        }
+
+        .rsvp-hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2rem, 6vw, 3.8rem);
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .rsvp-hero-title em {
+            font-style: italic;
+            color: var(--rose-dark);
+        }
+
+        .rsvp-hero-sub {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--rose);
+            margin-bottom: 20px;
+        }
+
+        .rsvp-deadline-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, .75);
+            border: 1px solid rgba(212, 168, 67, .3);
+            border-radius: 50px;
+            padding: 8px 20px;
+            font-size: .8rem;
+            font-weight: 700;
+            color: var(--text-mid);
+            backdrop-filter: blur(6px);
+        }
+
+        .rsvp-deadline-badge span:first-child {
+            color: var(--gold);
+        }
+
+        /* ═══ EVENT MINI-CARDS ═══ */
+        .event-strip {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding: 28px 24px;
+            background: var(--cream);
+            border-bottom: 1px solid rgba(212, 168, 67, .12);
+        }
+
+        .event-chip {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 20px;
+            background: var(--white);
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(248, 200, 212, .5);
+            box-shadow: var(--shadow-sm);
+            min-width: 160px;
+        }
+
+        .event-chip-icon {
+            font-size: 1.5rem;
+        }
+
+        .event-chip-label {
+            font-size: .65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .15em;
+            color: var(--gold);
+            margin-bottom: 2px;
+        }
+
+        .event-chip-value {
+            font-family: 'Playfair Display', serif;
+            font-size: .95rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        /* ═══ MAIN CONTENT ═══ */
+        .rsvp-main {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+            padding: 52px 24px 64px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+
+        /* ─── STEP INDICATOR ─── */
+        .step-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            max-width: 360px;
+            width: 100%;
+        }
+
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            flex: 1;
+        }
+
+        .step-circle {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .85rem;
+            font-weight: 700;
+            border: 2px solid rgba(201, 122, 138, .3);
+            color: var(--text-light);
+            background: var(--white);
+            transition: all .3s ease;
+        }
+
+        .step.active .step-circle {
+            background: linear-gradient(135deg, var(--rose), var(--gold));
+            border-color: transparent;
+            color: var(--white);
+            box-shadow: 0 4px 14px rgba(201, 122, 138, .35);
+        }
+
+        .step.done .step-circle {
+            background: var(--gold-pale);
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .step-label {
+            font-size: .65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            color: var(--text-light);
+        }
+
+        .step.active .step-label {
+            color: var(--rose-dark);
+        }
+
+        .step-line {
+            flex: 1;
+            height: 2px;
+            margin-bottom: 22px;
+            background: rgba(201, 122, 138, .2);
+            position: relative;
+        }
+
+        .step-line-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--rose), var(--gold));
+            border-radius: 2px;
+            transition: width .5s ease;
+        }
+
+        .step-line-fill.filled {
+            width: 100%;
+        }
+
+        /* ─── RSVP CARD ─── */
+        .rsvp-card {
+            width: 100%;
+            max-width: 600px;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(248, 200, 212, .3);
+            overflow: hidden;
+        }
+
+        .rsvp-card-header {
+            background: linear-gradient(135deg, #fde8ef 0%, #fdf3d8 100%);
+            padding: 28px 36px 24px;
+            border-bottom: 1px solid rgba(212, 168, 67, .15);
+            text-align: center;
+        }
+
+        .rsvp-card-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+
+        .rsvp-card-header p {
+            font-size: .9rem;
+            color: var(--text-light);
+        }
+
+        .rsvp-card-body {
+            padding: 36px 36px 40px;
+        }
+
+        /* ─── FORM STYLES ─── */
+        .form-section {
+            margin-bottom: 32px;
+        }
+
+        .form-section-title {
+            font-size: .68rem;
+            font-weight: 700;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(212, 168, 67, .2);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .form-label {
+            font-size: .78rem;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--text-mid);
+        }
+
+        .required {
+            color: var(--rose);
+            margin-left: 2px;
+        }
+
+        .optional {
+            font-weight: 300;
+            text-transform: none;
+            letter-spacing: 0;
+            color: var(--text-light);
+            font-size: .75rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 13px 16px;
+            border: 1.5px solid rgba(201, 122, 138, .22);
+            border-radius: var(--radius-sm);
+            font-family: 'Lato', sans-serif;
+            font-size: .92rem;
+            color: var(--text-dark);
+            background: var(--ivory);
+            outline: none;
+            resize: none;
+            transition: border-color .2s ease, box-shadow .2s ease;
+        }
+
+        .form-input:focus {
+            border-color: var(--pink-deep);
+            box-shadow: 0 0 0 4px rgba(232, 160, 184, .15);
+            background: var(--white);
+        }
+
+        .form-input::placeholder {
+            color: var(--text-light);
+        }
+
+        .form-error {
+            font-size: .76rem;
+            color: var(--rose-dark);
+            min-height: 17px;
+            display: block;
+        }
+
+        .form-textarea {
+            line-height: 1.65;
+        }
+
+        .char-counter {
+            font-size: .7rem;
+            color: var(--text-light);
+            text-align: right;
+            margin-top: 3px;
+        }
+
+        /* Radio buttons */
+        .radio-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .radio-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 18px 12px;
+            border: 2px solid rgba(201, 122, 138, .2);
+            border-radius: var(--radius-md);
+            background: var(--ivory);
+            cursor: pointer;
+            transition: border-color .2s ease, background .2s ease, box-shadow .2s ease;
+            text-align: center;
+        }
+
+        .radio-card:hover {
+            border-color: var(--pink-deep);
+            background: var(--pink-soft);
+        }
+
+        .radio-card input[type="radio"] {
+            display: none;
+        }
+
+        .radio-card-icon {
+            font-size: 2rem;
+            line-height: 1;
+        }
+
+        .radio-card-text {
+            font-size: .82rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .radio-card-sub {
+            font-size: .72rem;
+            color: var(--text-light);
+        }
+
+        .radio-card:has(input:checked) {
+            border-color: var(--rose);
+            background: var(--pink-soft);
+            box-shadow: 0 4px 16px rgba(201, 122, 138, .2);
+        }
+
+        .radio-card:has(input:checked) .radio-card-text {
+            color: var(--rose-dark);
+        }
+
+        /* Guest count selector */
+        .count-control {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .count-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(201, 122, 138, .3);
+            background: var(--ivory);
+            font-size: 1.3rem;
+            font-weight: 300;
+            color: var(--rose-dark);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background .2s ease, border-color .2s ease;
+            line-height: 1;
+        }
+
+        .count-btn:hover {
+            background: var(--pink-soft);
+            border-color: var(--pink-deep);
+        }
+
+        .count-btn:disabled {
+            opacity: .35;
+            cursor: not-allowed;
+        }
+
+        .count-display {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            min-width: 32px;
+            text-align: center;
+        }
+
+        .count-label {
+            font-size: .8rem;
+            color: var(--text-light);
+        }
+
+        /* Rating row */
+        .star-row {
+            display: flex;
+            gap: 8px;
+        }
+
+        .star-btn {
+            font-size: 1.8rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            opacity: .25;
+            transition: opacity .15s ease, transform .15s ease;
+            line-height: 1;
+        }
+
+        .star-btn:hover,
+        .star-btn.lit {
+            opacity: 1;
+        }
+
+        .star-btn:hover {
+            transform: scale(1.2);
+        }
+
+        /* Checkbox */
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            cursor: pointer;
+            padding: 12px 14px;
+            border-radius: var(--radius-sm);
+            border: 1.5px solid rgba(201, 122, 138, .18);
+            background: var(--ivory);
+            transition: border-color .2s, background .2s;
+        }
+
+        .checkbox-label:hover {
+            border-color: var(--pink-deep);
+            background: var(--pink-soft);
+        }
+
+        .checkbox-label input {
+            display: none;
+        }
+
+        .checkbox-custom {
+            width: 18px;
+            height: 18px;
+            border-radius: 5px;
+            border: 2px solid rgba(201, 122, 138, .4);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background .15s, border-color .15s;
+        }
+
+        .checkbox-custom::after {
+            content: '✓';
+            color: var(--white);
+            font-size: .7rem;
+            font-weight: 700;
+            opacity: 0;
+            transition: opacity .15s;
+        }
+
+        .checkbox-label input:checked~.checkbox-custom {
+            background: var(--rose);
+            border-color: var(--rose);
+        }
+
+        .checkbox-label input:checked~.checkbox-custom::after {
+            opacity: 1;
+        }
+
+        .checkbox-text {
+            font-size: .88rem;
+            color: var(--text-dark);
+        }
+
+        /* ─── SUBMIT BUTTON ─── */
+        .submit-btn {
+            width: 100%;
+            padding: 16px 24px;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(135deg, var(--rose) 0%, var(--gold) 100%);
+            color: var(--white);
+            font-family: 'Lato', sans-serif;
+            font-size: .95rem;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 0 8px 28px rgba(201, 122, 138, .38);
+            transition: transform .2s ease, box-shadow .2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 36px rgba(201, 122, 138, .45);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn .btn-arrow {
+            font-size: 1rem;
+            transition: transform .2s;
+        }
+
+        .submit-btn:hover .btn-arrow {
+            transform: translateX(4px);
+        }
+
+        /* ─── CONFIRMATION SCREEN ─── */
+        .confirm-screen {
+            display: none;
+            text-align: center;
+            padding: 52px 36px 48px;
+            animation: fadeUp .6s ease both;
+        }
+
+        .confirm-screen.visible {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .confirm-emoji {
+            font-size: 4.5rem;
+            margin-bottom: 18px;
+            display: block;
+            animation: popIn .5s cubic-bezier(.36, .07, .19, .97) .15s both;
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0) rotate(-10deg);
+            }
+
+            80% {
+                transform: scale(1.15) rotate(2deg);
+            }
+
+            100% {
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        .confirm-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .confirm-subtitle {
+            font-size: 1rem;
+            color: var(--text-mid);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .confirm-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--rose-dark);
+            margin-bottom: 28px;
+        }
+
+        .confirm-details {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+            max-width: 340px;
+            margin: 0 auto 32px;
+        }
+
+        .confirm-detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 16px;
+            background: var(--pink-soft);
+            border-radius: var(--radius-sm);
+            font-size: .88rem;
+        }
+
+        .confirm-detail-key {
+            color: var(--text-light);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            font-size: .72rem;
+        }
+
+        .confirm-detail-value {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .confirm-message-box {
+            background: var(--gold-pale);
+            border: 1px solid rgba(212, 168, 67, .25);
+            border-radius: var(--radius-md);
+            padding: 18px 22px;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1rem;
+            color: var(--text-mid);
+            line-height: 1.7;
+            margin-bottom: 28px;
+            max-width: 380px;
+            width: 100%;
+        }
+
+        .confirm-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 12px 26px;
+            border-radius: 50px;
+            font-family: 'Lato', sans-serif;
+            font-size: .85rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            text-decoration: none;
+            background: transparent;
+            border: 2px solid var(--rose);
+            color: var(--rose-dark);
+            transition: background .2s, transform .2s;
+        }
+
+        .btn-outline:hover {
+            background: var(--pink-soft);
+            transform: translateY(-2px);
+        }
+
+        /* ─── NO-SHOW CONFIRMATION ─── */
+        .confirm-screen.declined .confirm-title {
+            color: var(--rose-dark);
+        }
+
+        /* ═══ FOOTER ═══ */
+        .rsvp-footer {
+            background: linear-gradient(160deg, var(--text-dark) 0%, #5a2a38 100%);
+            text-align: center;
+            padding: 48px 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rsvp-footer::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(248, 200, 212, .07) 0%, transparent 70%);
+        }
+
+        .rsvp-footer-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        .rsvp-footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--gold-light);
+            margin-bottom: 14px;
+            letter-spacing: .08em;
+        }
+
+        .rsvp-footer-text {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: .98rem;
+            color: rgba(248, 200, 212, .8);
+            margin-bottom: 6px;
+        }
+
+        .rsvp-footer-sign {
+            font-size: .88rem;
+            color: rgba(248, 200, 212, .4);
+            margin-bottom: 4px;
+        }
+
+        .rsvp-footer-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--gold-light);
+        }
+
+        /* ═══ RESPONSIVE ═══ */
+        @media (max-width: 640px) {
+            .topbar {
+                padding: 0 18px;
+                height: 58px;
+            }
+
+            .rsvp-hero {
+                padding: 48px 18px 42px;
+            }
+
+            .rsvp-hero-title {
+                font-size: clamp(1.9rem, 8vw, 2.8rem);
+            }
+
+            .event-strip {
+                padding: 20px 18px;
+                gap: 10px;
+            }
+
+            .event-chip {
+                min-width: 0;
+                flex: 1;
+                padding: 12px 14px;
+            }
+
+            .rsvp-main {
+                padding: 36px 16px 52px;
+            }
+
+            .rsvp-card-header {
+                padding: 22px 22px 18px;
+            }
+
+            .rsvp-card-header h2 {
+                font-size: 1.4rem;
+            }
+
+            .rsvp-card-body {
+                padding: 24px 20px 28px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .radio-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+
+            .radio-card {
+                padding: 14px 8px;
+            }
+
+            .radio-card-icon {
+                font-size: 1.6rem;
+            }
+
+            .confirm-screen {
+                padding: 36px 20px 36px;
+            }
+
+            .confirm-title {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .event-strip {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .radio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .confirm-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn-outline,
+            .submit-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <canvas id="confetti-canvas"></canvas>
+    <div class="sparkle-bg" id="sparkleBg"></div>
+
+    <!-- ── TOP BAR ── -->
+    <header class="topbar">
+        <div class="topbar-logo">✦ Amna's 18th ✦</div>
+        <a href="index.html" class="topbar-back">
+            <span class="topbar-back-arrow">←</span> Back to Invitation
+        </a>
+    </header>
+
+    <!-- ── HERO STRIP ── -->
+    <div class="rsvp-hero">
+        <span class="hero-floater">❀</span>
+        <span class="hero-floater">✦</span>
+
+        <p class="rsvp-hero-label">— kindly respond —</p>
+        <h1 class="rsvp-hero-title">Will You Join <em>Amna's</em> Big Day?</h1>
+        <p class="rsvp-hero-sub">Amna's 18th Birthday Celebration</p>
+        <div class="rsvp-deadline-badge">
+            <span>⏳</span>
+            <span>RSVP by <strong>March 19, 2026</strong></span>
+        </div>
+    </div>
+
+    <!-- ── EVENT INFO STRIP ── -->
+    <div class="event-strip">
+        <div class="event-chip">
+            <span class="event-chip-icon">📅</span>
+            <div>
+                <div class="event-chip-label">Date</div>
+                <div class="event-chip-value">March 21, 2026</div>
+            </div>
+        </div>
+        <div class="event-chip">
+            <span class="event-chip-icon">⏰</span>
+            <div>
+                <div class="event-chip-label">Time</div>
+                <div class="event-chip-value">Morning to Evening</div>
+            </div>
+        </div>
+        <div class="event-chip">
+            <span class="event-chip-icon">📍</span>
+            <div>
+                <div class="event-chip-label">Venue</div>
+                <div class="event-chip-value">Our Home</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── MAIN RSVP CONTENT ── -->
+    <main class="rsvp-main">
+
+        <!-- Step Indicator -->
+        <div class="step-indicator" id="stepIndicator">
+            <div class="step active" id="step1">
+                <div class="step-circle">1</div>
+                <div class="step-label">Your Info</div>
+            </div>
+            <div class="step-line">
+                <div class="step-line-fill" id="stepLineFill"></div>
+            </div>
+            <div class="step" id="step2">
+                <div class="step-circle">2</div>
+                <div class="step-label">Details</div>
+            </div>
+            <div class="step-line">
+                <div class="step-line-fill" id="stepLineFill2"></div>
+            </div>
+            <div class="step" id="step3">
+                <div class="step-circle">✓</div>
+                <div class="step-label">Done!</div>
+            </div>
+        </div>
+
+        <!-- RSVP Card -->
+        <div class="rsvp-card" id="rsvpCard">
+            <div class="rsvp-card-header">
+                <h2 id="formStepTitle">Your Information</h2>
+                <p id="formStepSub">Tell us a little about you</p>
+            </div>
+
+            <div class="rsvp-card-body">
+
+                <!-- ── STEP 1: Basic Info ── -->
+                <div id="formStep1">
+                    <form id="rsvpForm" novalidate>
+
+                        <!-- Attendance -->
+                        <div class="form-section">
+                            <div class="form-section-title">Will you attend?</div>
+                            <div class="radio-grid">
+                                <label class="radio-card" for="attend-yes">
+                                    <input type="radio" id="attend-yes" name="attend" value="yes" />
+                                    <span class="radio-card-icon">🎉</span>
+                                    <span class="radio-card-text">Yes, I'll be there!</span>
+                                    <span class="radio-card-sub">Can't wait!</span>
+                                </label>
+                                <label class="radio-card" for="attend-no">
+                                    <input type="radio" id="attend-no" name="attend" value="no" />
+                                    <span class="radio-card-icon">😢</span>
+                                    <span class="radio-card-text">Sorry, I can't make it</span>
+                                    <span class="radio-card-sub">Will be missed</span>
+                                </label>
+                            </div>
+                            <span class="form-error" id="attend-error"></span>
+                        </div>
+
+                        <!-- Name fields -->
+                        <div class="form-section">
+                            <div class="form-section-title">Your Name</div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label" for="first-name">First Name <span
+                                            class="required">*</span></label>
+                                    <input type="text" id="first-name" name="firstName" class="form-input"
+                                        placeholder="e.g. Sarah" autocomplete="given-name" />
+                                    <span class="form-error" id="firstname-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="last-name">Last Name <span
+                                            class="required">*</span></label>
+                                    <input type="text" id="last-name" name="lastName" class="form-input"
+                                        placeholder="e.g. Ahmed" autocomplete="family-name" />
+                                    <span class="form-error" id="lastname-error"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contact -->
+                        <div class="form-section">
+                            <div class="form-section-title">Contact <span
+                                    style="font-weight:300;text-transform:none;letter-spacing:0;font-size:.75rem;">(optional)</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="phone">Phone / WhatsApp</label>
+                                <input type="tel" id="phone" name="phone" class="form-input"
+                                    placeholder="e.g. +63 912 345 6789" autocomplete="tel" />
+                            </div>
+                        </div>
+
+                        <button type="submit" class="submit-btn" id="step1Btn">
+                            Continue <span class="btn-arrow">→</span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- ── STEP 2: Details ── -->
+                <div id="formStep2" style="display:none;">
+
+                    <!-- Guest count -->
+                    <div class="form-section">
+                        <div class="form-section-title">How many guests?</div>
+                        <div class="count-control">
+                            <button class="count-btn" id="countDown" aria-label="Decrease">−</button>
+                            <span class="count-display" id="guestCountDisplay">1</span>
+                            <button class="count-btn" id="countUp" aria-label="Increase">+</button>
+                            <span class="count-label">including yourself</span>
+                        </div>
+                    </div>
+
+                    <!-- Dietary preferences -->
+                    <div class="form-section">
+                        <div class="form-section-title">Dietary notes <span
+                                style="font-weight:300;text-transform:none;letter-spacing:0;font-size:.75rem;">(optional)</span>
+                        </div>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label" for="diet-halal">
+                                <input type="checkbox" id="diet-halal" name="diet" value="halal" />
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-text">🥩 Halal only</span>
+                            </label>
+                            <label class="checkbox-label" for="diet-vegetarian">
+                                <input type="checkbox" id="diet-vegetarian" name="diet" value="vegetarian" />
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-text">🥗 Vegetarian</span>
+                            </label>
+                            <label class="checkbox-label" for="diet-none">
+                                <input type="checkbox" id="diet-none" name="diet" value="none" />
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-text">😋 No restrictions</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Excitement rating -->
+                    <div class="form-section">
+                        <div class="form-section-title">How excited are you? 🌟</div>
+                        <div class="star-row" id="starRow">
+                            <button type="button" class="star-btn" data-val="1" aria-label="1 star">⭐</button>
+                            <button type="button" class="star-btn" data-val="2" aria-label="2 stars">⭐</button>
+                            <button type="button" class="star-btn" data-val="3" aria-label="3 stars">⭐</button>
+                            <button type="button" class="star-btn" data-val="4" aria-label="4 stars">⭐</button>
+                            <button type="button" class="star-btn" data-val="5" aria-label="5 stars">⭐</button>
+                        </div>
+                    </div>
+
+                    <!-- Birthday message -->
+                    <div class="form-section" id="messageSection">
+                        <div class="form-section-title">Leave a birthday message <span
+                                style="font-weight:300;text-transform:none;letter-spacing:0;font-size:.75rem;">(optional)</span>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="rsvp-message" name="message" class="form-input form-textarea"
+                                placeholder="Write a birthday wish for Amna… 💕" rows="4" maxlength="300"></textarea>
+                            <div class="char-counter"><span id="charCount">0</span> / 300</div>
+                        </div>
+                    </div>
+
+                    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+                        <button type="button" class="btn-outline" id="backBtn" style="flex:1;min-width:120px;">←
+                            Back</button>
+                        <button type="button" class="submit-btn" id="step2Btn" style="flex:2;">
+                            Send RSVP <span class="btn-arrow">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ── CONFIRMATION SCREEN ── -->
+                <div class="confirm-screen" id="confirmScreen">
+                    <span class="confirm-emoji" id="confirmEmoji">🎊</span>
+                    <h2 class="confirm-title" id="confirmTitle">Thank you!</h2>
+                    <p class="confirm-subtitle" id="confirmSubtitle">We've received your RSVP.</p>
+                    <p class="confirm-name" id="confirmName"></p>
+                    <div class="confirm-details" id="confirmDetails"></div>
+                    <div class="confirm-message-box" id="confirmMessageBox" style="display:none;"></div>
+                    <div class="confirm-actions">
+                        <a href="index.html" class="btn-outline">← View Invitation</a>
+                        <button type="button" class="btn-outline" id="rsvpAgain">Submit Another</button>
+                    </div>
+                </div>
+
+            </div><!-- /rsvp-card-body -->
+        </div><!-- /rsvp-card -->
+
+    </main>
+
+    <!-- ── FOOTER ── -->
+    <footer class="rsvp-footer">
+        <div class="rsvp-footer-inner">
+            <div class="rsvp-footer-logo">✦ Amna's 18th ✦</div>
+            <p class="rsvp-footer-text">Your presence would truly mean so much to me.</p>
+            <p class="rsvp-footer-sign">Sincerely,</p>
+            <p class="rsvp-footer-name">Amna</p>
+        </div>
+    </footer>
+
+    <script>
+        /* ═══════════════════════════════════════════
+           RSVP PAGE — script
+        ═══════════════════════════════════════════ */
+        'use strict';
+
+        /* ─── Sparkles ─── */
+        (function () {
+            const bg = document.getElementById('sparkleBg');
+            const colors = ['#f8c8d4', '#e8a0b8', '#d4a843', '#f0d080', '#e8e0f0'];
+            for (let i = 0; i < 40; i++) {
+                const el = document.createElement('div');
+                el.className = 'sparkle';
+                const s = [4, 6, 8, 5, 7][Math.floor(Math.random() * 5)];
+                const c = colors[Math.floor(Math.random() * colors.length)];
+                el.style.cssText = `width:${s}px;height:${s}px;background:${c};
+        left:${Math.random() * 100}%;top:${Math.random() * 100}%;
+        --dur:${(3 + Math.random() * 5).toFixed(2)}s;
+        --delay:${(Math.random() * 7).toFixed(2)}s;
+        box-shadow:0 0 ${s * 2}px ${c};`;
+                bg.appendChild(el);
+            }
+        })();
+
+        /* ─── State ─── */
+        let guestCount = 1;
+        let starRating = 0;
+        let formData = {};
+
+        /* ─── Elements ─── */
+        const rsvpForm = document.getElementById('rsvpForm');
+        const step1El = document.getElementById('formStep1');
+        const step2El = document.getElementById('formStep2');
+        const confirmEl = document.getElementById('confirmScreen');
+        const stepTitle = document.getElementById('formStepTitle');
+        const stepSub = document.getElementById('formStepSub');
+        const step1Ind = document.getElementById('step1');
+        const step2Ind = document.getElementById('step2');
+        const step3Ind = document.getElementById('step3');
+        const lineFill1 = document.getElementById('stepLineFill');
+        const lineFill2 = document.getElementById('stepLineFill2');
+        const countDisplay = document.getElementById('guestCountDisplay');
+        const countDown = document.getElementById('countDown');
+        const countUp = document.getElementById('countUp');
+        const charCountEl = document.getElementById('charCount');
+        const msgTextarea = document.getElementById('rsvp-message');
+        const msgSection = document.getElementById('messageSection');
+        const canvas = document.getElementById('confetti-canvas');
+
+        /* ─── Form Error helpers ─── */
+        function showErr(id, msg) { const el = document.getElementById(id); if (el) el.textContent = msg; }
+        function clearErr(id) { showErr(id, ''); }
+
+        /* ─── Attendance change → hide message if No ─── */
+        document.querySelectorAll('input[name="attend"]').forEach(r => {
+            r.addEventListener('change', () => {
+                msgSection.style.display = r.value === 'yes' ? '' : 'none';
+            });
+        });
+
+        /* ─── Guest count ─── */
+        function updateCount() {
+            countDisplay.textContent = guestCount;
+            countDown.disabled = guestCount <= 1;
+            countUp.disabled = guestCount >= 10;
+        }
+        countDown.addEventListener('click', () => { if (guestCount > 1) { guestCount--; updateCount(); } });
+        countUp.addEventListener('click', () => { if (guestCount < 10) { guestCount++; updateCount(); } });
+        updateCount();
+
+        /* ─── Character counter ─── */
+        msgTextarea.addEventListener('input', () => {
+            charCountEl.textContent = msgTextarea.value.length;
+        });
+
+        /* ─── Star rating ─── */
+        const starBtns = document.querySelectorAll('.star-btn');
+        starBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                starRating = parseInt(btn.dataset.val);
+                starBtns.forEach(b => b.classList.toggle('lit', parseInt(b.dataset.val) <= starRating));
+            });
+            btn.addEventListener('mouseenter', () => {
+                const hv = parseInt(btn.dataset.val);
+                starBtns.forEach(b => b.classList.toggle('lit', parseInt(b.dataset.val) <= hv));
+            });
+        });
+        document.getElementById('starRow').addEventListener('mouseleave', () => {
+            starBtns.forEach(b => b.classList.toggle('lit', parseInt(b.dataset.val) <= starRating));
+        });
+
+        /* ─── STEP 1 Submit ─── */
+        rsvpForm.addEventListener('submit', e => {
+            e.preventDefault();
+            clearErr('attend-error'); clearErr('firstname-error'); clearErr('lastname-error');
+
+            const attend = document.querySelector('input[name="attend"]:checked');
+            const firstName = document.getElementById('first-name').value.trim();
+            const lastName = document.getElementById('last-name').value.trim();
+            let valid = true;
+
+            if (!attend) { showErr('attend-error', 'Please select an option.'); valid = false; }
+            if (!firstName) { showErr('firstname-error', 'First name is required.'); valid = false; }
+            if (!lastName) { showErr('lastname-error', 'Last name is required.'); valid = false; }
+            if (!valid) return;
+
+            formData.attend = attend.value;
+            formData.firstName = firstName;
+            formData.lastName = lastName;
+            formData.phone = document.getElementById('phone').value.trim();
+
+            goToStep2();
+        });
+
+        /* ─── Back button ─── */
+        document.getElementById('backBtn').addEventListener('click', goToStep1);
+
+        /* ─── Step 2 Submit ─── */
+        document.getElementById('step2Btn').addEventListener('click', () => {
+            const diets = [...document.querySelectorAll('input[name="diet"]:checked')].map(c => c.value);
+            formData.guests = guestCount;
+            formData.diets = diets;
+            formData.stars = starRating;
+            formData.message = msgTextarea.value.trim();
+            formData.timestamp = new Date().toISOString();
+
+            // Save to localStorage
+            const existingResponses = JSON.parse(localStorage.getItem('rsvpResponses') || '[]');
+            existingResponses.push(formData);
+            localStorage.setItem('rsvpResponses', JSON.stringify(existingResponses));
+
+            showConfirmation();
+        });
+
+        /* ─── Reset ─── */
+        document.getElementById('rsvpAgain').addEventListener('click', () => {
+            rsvpForm.reset();
+            msgTextarea.value = '';
+            charCountEl.textContent = '0';
+            guestCount = 1; updateCount();
+            starRating = 0; starBtns.forEach(b => b.classList.remove('lit'));
+            document.querySelectorAll('input[name="diet"]').forEach(c => c.checked = false);
+            msgSection.style.display = '';
+            formData = {};
+            goToStep1(true);
+        });
+
+        /* ─── Navigation functions ─── */
+        function goToStep1(reset) {
+            step1El.style.display = '';
+            step2El.style.display = 'none';
+            confirmEl.classList.remove('visible');
+            stepTitle.textContent = 'Your Information';
+            stepSub.textContent = 'Tell us a little about you';
+            step1Ind.classList.add('active'); step1Ind.classList.remove('done');
+            step2Ind.classList.remove('active', 'done');
+            step3Ind.classList.remove('active', 'done');
+            lineFill1.classList.remove('filled');
+            lineFill2.classList.remove('filled');
+        }
+
+        function goToStep2() {
+            step1El.style.display = 'none';
+            step2El.style.display = '';
+            stepTitle.textContent = 'A Few More Details';
+            stepSub.textContent = 'Help us plan the perfect celebration';
+            step1Ind.classList.remove('active'); step1Ind.classList.add('done');
+            step2Ind.classList.add('active');
+            lineFill1.classList.add('filled');
+            window.scrollTo({ top: document.getElementById('rsvpCard').offsetTop - 80, behavior: 'smooth' });
+        }
+
+        function showConfirmation() {
+            const attending = formData.attend === 'yes';
+            const name = `${formData.firstName} ${formData.lastName}`;
+
+            step2El.style.display = 'none';
+            confirmEl.classList.add('visible', attending ? '' : 'declined');
+            step2Ind.classList.remove('active'); step2Ind.classList.add('done');
+            step3Ind.classList.add('active', 'done');
+            lineFill2.classList.add('filled');
+
+            document.getElementById('confirmEmoji').textContent = attending ? '🎊' : '💌';
+            document.getElementById('confirmTitle').textContent = attending ? 'See you there!' : 'We understand!';
+            document.getElementById('confirmSubtitle').textContent = attending
+                ? "We're so happy you'll be joining us for the celebration!"
+                : "Thank you for letting us know — you'll be missed!";
+            document.getElementById('confirmName').textContent = name;
+
+            // Detail rows
+            const details = document.getElementById('confirmDetails');
+            details.innerHTML = '';
+            const rows = [
+                ['Attendance', attending ? '✅ Attending' : '❌ Not attending'],
+                ['Guests', attending ? `${formData.guests} person${formData.guests > 1 ? 's' : ''}` : '—'],
+            ];
+            if (formData.diets && formData.diets.length) rows.push(['Diet', formData.diets.join(', ')]);
+            if (formData.stars) rows.push(['Excitement', '⭐'.repeat(formData.stars)]);
+            rows.forEach(([k, v]) => {
+                const row = document.createElement('div');
+                row.className = 'confirm-detail-row';
+                row.innerHTML = `<span class="confirm-detail-key">${k}</span><span class="confirm-detail-value">${v}</span>`;
+                details.appendChild(row);
+            });
+
+            // Birthday message
+            const msgBox = document.getElementById('confirmMessageBox');
+            if (formData.message) {
+                msgBox.style.display = '';
+                msgBox.textContent = `"${formData.message}"`;
+            } else {
+                msgBox.style.display = 'none';
+            }
+
+            // Confetti if attending
+            if (attending) launchConfetti();
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        /* ─── Confetti ─── */
+        function launchConfetti() {
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            const colors = ['#f8c8d4', '#e8a0b8', '#d4a843', '#f0d080', '#c97a8a', '#e8e0f0', '#fff'];
+            const pieces = Array.from({ length: 160 }, () => ({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height - canvas.height,
+                w: 5 + Math.random() * 8, h: 9 + Math.random() * 6,
+                color: colors[Math.floor(Math.random() * colors.length)],
+                vx: -2 + Math.random() * 4, vy: 3 + Math.random() * 5,
+                angle: Math.random() * Math.PI * 2, spin: -.1 + Math.random() * .2,
+                alpha: 1,
+            }));
+            let frames = 0, raf;
+            (function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                frames++;
+                pieces.forEach(p => {
+                    p.x += p.vx; p.y += p.vy; p.angle += p.spin;
+                    if (frames > 100) p.alpha = Math.max(0, p.alpha - .015);
+                    ctx.save();
+                    ctx.globalAlpha = p.alpha;
+                    ctx.translate(p.x, p.y); ctx.rotate(p.angle);
+                    ctx.fillStyle = p.color;
+                    ctx.beginPath();
+                    ctx.ellipse(0, 0, p.w / 2, p.h / 2, 0, 0, Math.PI * 2);
+                    ctx.fill(); ctx.restore();
+                });
+                if (frames < 180) raf = requestAnimationFrame(draw);
+                else { ctx.clearRect(0, 0, canvas.width, canvas.height); cancelAnimationFrame(raf); }
+            })();
+        }
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        }, { passive: true });
+    </script>
+</body>
+
+</html>
